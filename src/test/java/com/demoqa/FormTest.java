@@ -10,7 +10,7 @@ public class FormTest {
     static void beforeAll() {
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = "1024x768";
     }
     @Test
     void fillFormTest(){
