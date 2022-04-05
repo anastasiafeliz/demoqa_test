@@ -1,10 +1,9 @@
 package com.demoqa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Selenide.*;
 
 public class FormTest {
     @BeforeAll
@@ -15,15 +14,21 @@ public class FormTest {
     }
     @Test
     void fillFormTest(){
-        open("/automation-practice-form");
+        Selenide.open("/automation-practice-form");
 
-        $("[id=FirstName]").setValue("Anastasia");
-        $("[id=LastName]").setValue("Piganova");
-        $("[id=userEmail]").setValue("piganova@io.com");
-        $("[byText=Male]").click();
-        $("[id=userNumber]").setValue("5555555");
-        $("[id=dateOfBirthInput]").setValue("25 Jan 1988");
-
+        Selenide.$("[id=FirstName]").setValue("Anastasia");
+        Selenide.$("[id=LastName]").setValue("Piganova");
+        Selenide.$("[id=userEmail]").setValue("piganova@io.com");
+        Selenide.$("[byText=Male]").click();
+        Selenide.$("[id=userNumber]").setValue("5555555");
+        Selenide.$("[id=dateOfBirthInput]").setValue("25 Jan 1988");
+        Selenide.$("[id=subjects-label]").setValue("Chemistry");
+        Selenide.$("[byText=Reading]").click();
+        Selenide.$("[id=uploadPicture]").uploadFromClasspath("photo");
+        Selenide.$("[id=currentAddress]").setValue("XOXOXO");
+        Selenide.$("[id=state]").click("Utar Pradesh");
+        Selenide.$("[id=city]").click("Agra");
+        Selenide.$("[id=submit]").click();
 
     }
 }
