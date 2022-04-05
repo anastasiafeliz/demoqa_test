@@ -26,8 +26,8 @@ public class FormTest {
         Selenide.$("[byText=Reading]").click();
         Selenide.$("[id=uploadPicture]").uploadFromClasspath("photo");
         Selenide.$("[id=currentAddress]").setValue("XOXOXO");
-        Selenide.$("[id=state]").click("Utar Pradesh");
-        Selenide.$("[id=city]").click("Agra");
+        Selenide.$("[byText=state]").click();
+        Selenide.$("[byText=city]").click();
         Selenide.$("[id=submit]").click();
 
     }
