@@ -20,8 +20,8 @@ public class FormTest {
         Selenide.open("/automation-practice-form");
         Selenide.executeJavaScript("document.querySelector(\"footer\").hidden = 'true';" +
                 "document.querySelector(\"#fixedban\").hidden = 'true'");
-        Selenide.$("[id=firstName]").setValue("Anastasia");
-        Selenide.$("[id=lastName]").setValue("Piganova");
+        $("[id=firstName]").setValue("Anastasia");
+        $("[id=lastName]").setValue("Piganova");
         Selenide.$("[id=userEmail]").setValue("piganova@io.com");
         Selenide.$("[id=userNumber]").setValue("5555555");
         Selenide.$("[id=dateOfBirthInput]").click();
