@@ -4,10 +4,13 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.conditions.Text;
 import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -27,33 +30,35 @@ static void beforeAll() {
     Selenide.open("/automation-practice-form");
     Selenide.executeJavaScript("document.querySelector(\"footer\").hidden = 'true';document.querySelector(\"#fixedban\").hidden = 'true'");
 
-        $("[id=firstName]").setValue("Anastasia"); //имя
-        $("[id=lastName]").setValue("Piganova");//фамилия
-        $("[id=userEmail]").setValue("piganova@io.com");//почта
+        $("[id=firstName]").setValue("Anastasia");
+        $("[id=lastName]").setValue("Piganova");
+        $("[id=userEmail]").setValue("piganova@io.com");
 
-       // $("#gender-radio-3").parent().click();//пол
+       // $("#gender-radio-3").parent().click();//не срабатывает
         $("[id=genterWrapper]").$(new ByText("Other")).click();
-        $("[id=userNumber]").setValue("5555555");//телефон
-        $("#dateOfBirthInput").click();//дата рождения
-        $(".react-datepicker__month-select").selectOptionByValue("1");//месяц
-        $(".react-datepicker__year-select").selectOptionByValue("1988");//год
-        //$(".react-datepicker__day—025").click();//не срабатывает
+        $("[id=userNumber]").setValue("1234567890");
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOptionByValue("1");
+        $(".react-datepicker__year-select").selectOptionByValue("1988");
+        //$(".react-datepicker__day—select").click();//не срабатывает
 
-        $("#subjectsInput").setValue("Chemistry").pressEnter();//не работает
-        $("#hobbies-checkbox-3").parent().click(); //не работает
+        $("#subjectsInput").setValue("Chemistry").pressEnter();//не срабатывает
+        $("#hobbies-checkbox-3").parent().click(); //не срабатывает
 
-        $("#uploadPicture").uploadFromClasspath("123.jpg"); //моя фотка
-        $("#currentAdress").setValue("Ulitsa 34");
-        $("[id=stateCity-wrapper]").$(new ByText("NRC")).click();
+        $("#uploadPicture").uploadFile(new File("src/test/resourses/123.jpg"));
+
+        $("[id=currentAddress]").setValue("Ulitsa 34");
+        $("#state").click();
+        $(new ByText("Uttar Pradesh")).click();
         $("#city").click();
-        $("#stateCity-wrapper").$(new ByText("Delhi")).click();
-        $("#city").click();
+        $(new ByText("Lucknow")).click();
 
         $("[id=submit]").shouldBe(Condition.visible).click();
 
-       // $(".modal-open").shouldHave(text("Thanks for submitting the form"));
-       // $(".table-responsive").shouldHave(text("Anastasia Piganova"));
+       $(".modal-open").shouldHave(new Text("Thanks for submitting the form"));
+       $(".table-responsive").shouldHave(new Text("Anastasia Piganova"));
 
 
-}
+
+    }
 }
