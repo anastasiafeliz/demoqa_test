@@ -22,9 +22,7 @@ static void beforeAll() {
     Configuration.browserSize = "1024x768";
 }
     @Test
-    void fillFormTest() {
-
-    }
+    void fillFormTest() {}
 
     {
     Selenide.open("/automation-practice-form");
@@ -57,8 +55,6 @@ static void beforeAll() {
 
        $(".modal-open").shouldHave(new Text("Thanks for submitting the form"));
        $(".table-responsive").shouldHave(new Text("Anastasia Piganova"));
-
-
 
     }
 }
