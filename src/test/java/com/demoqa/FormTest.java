@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -27,16 +28,15 @@ public class FormTest {
         $("[id=lastName]").setValue("Piganova");
         $("[id=userEmail]").setValue("piganova@io.com");
         $("[id=userNumber]").setValue("5555555");
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOptionByValue("1");
+        $(".react-datepicker__year-select").selectOptionByValue("1990");
+        $(".react-datepicker__day—005").click();
         $("[id=subjects-label]").click();
         $("[id=subjects-label]").selectOption("Chemistry");
         $("[id=hobbiesWrapper]").click();
         $("[id=hobbiesWrapper]").selectOption("Reading");
         $("[id=uploadPicture]").uploadFromClasspath("photo.jpg");
-        $("[id=currentAddress]").setValue("Ulitsa 34");
-        $("[byText=state]").click();
-        $("[byText=city]").click();
-        $("[id=submit]").click();
-        $("[id=submit]").shouldBe(Condition.visible).click();
 
     }
 }
