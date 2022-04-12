@@ -33,7 +33,8 @@ static void beforeAll() {
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOptionByValue("1");
         $(".react-datepicker__year-select").selectOptionByValue("1988");
-        //$(".react-datepicker__day").selectOptionByValue("25"); никак не хочет дату выбирать
+        //$(".react-datepicker__day").find(new ByText("5")).click(); //тоже не работает
+        //$(".react-datepicker__day").selectOptionByValue("5"); //тоже не работает
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Chemistry").pressEnter();
         $(new ByText("Reading")).click();
