@@ -8,6 +8,8 @@ import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
+
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class Aprilnew {
@@ -27,25 +29,26 @@ static void beforeAll() {
         $("[id=lastName]").setValue("Piganova");
         $("[id=userEmail]").setValue("piganova@io.com");
 
-        $("[id=genterWrapper]").$(new ByText("Female")).click();
+        $("[id=genterWrapper]").$(byText("Female")).click();
         $("[id=userNumber]").setValue("1234567890");
 
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOptionByValue("1");
-        $(".react-datepicker__year-select").selectOptionByValue("1988");
-        //$(".react-datepicker__day").find(new ByText("5")).click(); //тоже не работает
-        //$(".react-datepicker__day").selectOptionByValue("5"); //тоже не работает
+        $(".react-datepicker__month-select").scrollIntoView(true).selectOption("January");
+        $(".react-datepicker__year-select").selectOption("1988");
+        $(".react-datepicker__day--005").click();
+
+
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Chemistry").pressEnter();
-        $(new ByText("Reading")).click();
+        $(byText("Reading")).click();
 
         $("#uploadPicture").uploadFile(new File("src/test/resources/123.jpg"));
 
         $("[id=currentAddress]").setValue("Ulitsa 34");
         $("#state").click();
-        $(new ByText("Uttar Pradesh")).click();
+        $(byText("Uttar Pradesh")).click();
         $("#city").click();
-        $(new ByText("Lucknow")).click();
+        $(byText("Lucknow")).click();
 
         $("[id=submit]").shouldBe(Condition.visible).click();
 
@@ -54,9 +57,9 @@ static void beforeAll() {
         $(".table-responsive").shouldHave(new Text("piganova@io.com"));
         $(".table-responsive").shouldHave(new Text("Female"));
         $(".table-responsive").shouldHave(new Text("1234567890"));
+        $(".table-responsive").shouldHave(new Text("05 January,1988"));
         $(".table-responsive").shouldHave(new Text("Chemistry"));
         $(".table-responsive").shouldHave(new Text("Reading"));
-        $(".table-responsive").shouldHave(new Text("12 April,2022"));
         $(".table-responsive").shouldHave(new Text("Ulitsa 34"));
         $(".table-responsive").shouldHave(new Text("Uttar Pradesh Lucknow"));
     }
