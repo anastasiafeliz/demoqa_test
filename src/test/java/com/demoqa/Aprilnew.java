@@ -19,8 +19,9 @@ static void beforeAll() {
 }
     @Test
     void fillFormTest() {
-    Selenide.open("/automation-practice-form");
-    Selenide.executeJavaScript("document.querySelector(\"footer\").hidden = 'true';document.querySelector(\"#fixedban\").hidden = 'true'");
+        Selenide.open("/automation-practice-form");
+        Selenide.executeJavaScript("document.querySelector(\"footer\")." +
+                "hidden = 'true';document.querySelector(\"#fixedban\").hidden = 'true'");
 
         $("[id=firstName]").setValue("Anastasia");
         $("[id=lastName]").setValue("Piganova");
@@ -32,7 +33,7 @@ static void beforeAll() {
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOptionByValue("1");
         $(".react-datepicker__year-select").selectOptionByValue("1988");
-        $(".react-datepicker__day").selectOptionByValue("25");
+        //$(".react-datepicker__day").selectOptionByValue("25"); никак не хочет дату выбирать
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Chemistry").pressEnter();
         $(new ByText("Reading")).click();
@@ -47,8 +48,15 @@ static void beforeAll() {
 
         $("[id=submit]").shouldBe(Condition.visible).click();
 
-       $(".modal-open").shouldHave(new Text("Thanks for submitting the form"));
-       $(".table-responsive").shouldHave(new Text("Anastasia Piganova"));
-
+        $(".modal-open").shouldHave(new Text("Thanks for submitting the form"));
+        $(".table-responsive").shouldHave(new Text("Anastasia Piganova"));
+        $(".table-responsive").shouldHave(new Text("piganova@io.com"));
+        $(".table-responsive").shouldHave(new Text("Female"));
+        $(".table-responsive").shouldHave(new Text("1234567890"));
+        $(".table-responsive").shouldHave(new Text("Chemistry"));
+        $(".table-responsive").shouldHave(new Text("Reading"));
+        $(".table-responsive").shouldHave(new Text("12 April,2022"));
+        $(".table-responsive").shouldHave(new Text("Ulitsa 34"));
+        $(".table-responsive").shouldHave(new Text("Uttar Pradesh Lucknow"));
     }
 }
